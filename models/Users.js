@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    streaks:{
+        type: Number,
+        required: true
+    },
 })
 
 module.exports = mongoose.model("users", UserSchema)

@@ -11,6 +11,19 @@ router.get('/getUsers', async (req, res) => {
   res.send(userTemp)
 })
 
+async function userStreak (email, reset){
+  try {
+    let update
+    if(reset){
+      update = await Users.updateOne({email: email}, {streaks: 0})
+    }else{
+      update = await Users.updateOne({email: email}, {streaks: streaks +1})
+    }
+    return update
+  } catch (error) {
+    return error
+  }
+}
 // Check email exist middleware
 const checkEmailExist = async (req,res,next) => {
   const {email} = req.body
@@ -42,7 +55,8 @@ router.post('/add', checkEmailExist, async (req, res) => {
     email:email,
     password:password,
     name:name,
-    gender:gender
+    gender:gender,
+    streaks: 0
   }
   try {
     const insert = await Users.create(newUser)
@@ -50,6 +64,35 @@ router.post('/add', checkEmailExist, async (req, res) => {
     
   } catch (error) {
     return res.status(400).send(`${error}`)
+  }
+})
+
+router.put('/streaks/:email', async (req, res) => {
+  const {email} = req.params
+  const {reset} = req.query
+  let mode = false
+  let streaksCount = 0
+  try {
+    let result = await Users.findOne({email:email})
+    streaksCount = result.streaks + 1
+
+  } catch (error) {
+    return res.status(400).send(error)
+    
+  }
+
+  if(!email){
+    return res.status(400).send("Email field invalid")
+  }
+
+  if(!reset){
+    update = await Users.updateOne({email: email}, {streaks: streaksCount})
+    return res.status(201).send("Streaks added")
+
+  }else{
+    update = await Users.updateOne({email: email}, {streaks: 0})
+    return res.status(201).send("Streaks reseted")
+
   }
 })
 

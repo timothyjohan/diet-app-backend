@@ -77,7 +77,7 @@ router.get('/dates', async (req, res) => {
 })
 
 
-// INI BELUM BENARRRRR
+// INI BELUM BENARRRRR (tapi jalan)
 async function getDailyNutritionSummary(email) {
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
