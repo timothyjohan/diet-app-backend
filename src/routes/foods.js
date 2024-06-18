@@ -53,7 +53,6 @@ router.post('/add', checkUser, async (req, res) => {
     return res.status(500).send(error)
   }
 
-  res.send(newLog)
 })
 
 module.exports = router

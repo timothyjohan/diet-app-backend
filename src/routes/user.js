@@ -12,7 +12,7 @@ router.get('/getUsers', async (req, res) => {
 })
 
 // Check email exist middleware
-const checkEmailExist = async (req,res,next) =>{
+const checkEmailExist = async (req,res,next) => {
   const {email} = req.body
 
   if (!email) {
