@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require("dotenv").config();
 const user = require('./routes/user')
 const foods = require('./routes/foods')
+const syndigo = require('./routes/syndigo')
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({extended: true}))
 
 app.use('/api/user', user)
 app.use('/api/foods', foods)
+app.use('/api/3rdparty', syndigo)
 
 app.listen(process.env.PORT, async () => {
     try {
