@@ -10,19 +10,19 @@ const LogFoodSchema = new mongoose.Schema({
         required: true
     },
     calories:{
-        type: Double,
+        type: Number,
         required: true
     },
     proteins:{
-        type: Double,
+        type: Number,
         required: true
     },
     fats:{
-        type: Double,
+        type: Number,
         required: true
     },
     carbs:{
-        type: Double,
+        type: Number,
         required: true
     },
     date:{
