@@ -16,8 +16,13 @@ router.get('/autocomplete', async (req, res) => {
                 "x-app-key":process.env.X_APP_KEY
             }
         })
-        let arrAuto = []
-        return res.status(200).send(result.data.common)
+        const data = result.data;
+        const commonFoodNames = data.common.map(item => item.food_name);
+        const brandedFoodNames = data.branded.map(item => item.food_name);
+
+        // Combine the food names into one array
+        const allFoodNames = [...commonFoodNames, ...brandedFoodNames];
+        return res.status(200).send(allFoodNames)
     } catch (error) {
         return res.status(500).send(error.message)
         
