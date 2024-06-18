@@ -11,7 +11,27 @@ router.get('/getUsers', async (req, res) => {
   res.send(userTemp)
 })
 
-router.post('/add', async (req, res) => {
+// Check email exist
+const checkEmailExist = async (req,res,next) =>{
+  const {email} = req.body
+
+  if (!email) {
+    return res.status(400).send('Email is required');
+  }
+
+  try {
+    const user = await Users.findOne({email: email})
+    if (user) {
+      return res.status(400).send('Email is already in use');
+    }
+    next();
+  } catch (error) {
+    return res.status(500).send(`Error checking email: ${error.message}`);
+  }
+}
+
+// Add account
+router.post('/add', checkEmailExist, async (req, res) => {
   const {email, password, name, gender} = req.body
 
   if(!email || !password || !name || !gender){
