@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   res.send('GET request to the food')
 })
 
+// check user middleware
 const checkUser = async (req, res, next) =>{
   const {email} = req.body
   if(!email){
@@ -24,6 +25,7 @@ const checkUser = async (req, res, next) =>{
     
   }
 }
+// Add new log
 router.post('/add', checkUser, async (req, res) => {
   const {email, food_name, calories, proteins, fats, carbs, date} = req.body
   let newDate = date
