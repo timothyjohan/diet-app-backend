@@ -101,9 +101,9 @@ router.post('/login', async (req, res) => {
   const login = await Users.findOne({email:email, password:password})
 
   if(login){
-    return res.status(400).send("TRUE")
+    return res.status(200).send("MASUK")
   }else{
-    return res.status(400).send("FALSE")
+    return res.status(401).send("NDAK")
 
   }
 })
