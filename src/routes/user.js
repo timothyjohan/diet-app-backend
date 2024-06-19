@@ -96,4 +96,16 @@ router.put('/streaks/:email', async (req, res) => {
   }
 })
 
+router.post('/login', async (req, res) => {
+  const {email, password} = req.body
+  const login = await Users.findOne({email:email, password:password})
+
+  if(login){
+    return res.status(400).send("TRUE")
+  }else{
+    return res.status(400).send("FALSE")
+
+  }
+})
+
 module.exports = router
