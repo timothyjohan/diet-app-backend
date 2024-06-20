@@ -59,21 +59,37 @@ router.post('/add', checkUser, async (req, res) => {
 // Format before and after harus dalam bentuk date YYYY-MM-DD
 // contoh: 2024-6-18
 router.get('/dates', async (req, res) => {
-  const {before, after} = req.query
-  try {
-    const result = await LogFoods.find({
-      date:{
-        $gt: new Date(after),
-        $lt: new Date(before)
-      }
-    })
-    return res.status(200).send(result)
-    
-  } catch (error) {
-    return res.status(500).send(error)
-    
+  const {before, after, email} = req.query
+  if(!email){
+    try {
+      const result = await LogFoods.find({
+        date:{
+          $gt: new Date(after),
+          $lt: new Date(before)
+        }
+      })
+      return res.status(200).send(result)
+      
+    } catch (error) {
+      return res.status(500).send(error)
+      
+    }
+  }else{
+    try {
+      const result = await LogFoods.find({
+        date:{
+          $gt: new Date(after),
+          $lt: new Date(before)
+        },
+        email:email
+      })
+      return res.status(200).send(result)
+      
+    } catch (error) {
+      return res.status(500).send(error)
+      
+    }
   }
-  res.send('GET request to the homepage')
 })
 
 
