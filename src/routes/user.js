@@ -56,6 +56,7 @@ router.post('/add', checkEmailExist, async (req, res) => {
     password:password,
     name:name,
     gender:gender,
+    calories:0,
     streaks: 0
   }
   try {
@@ -104,7 +105,6 @@ router.post('/login', async (req, res) => {
     return res.status(200).send("MASUK")
   }else{
     return res.status(401).send("NDAK")
-
   }
 })
 

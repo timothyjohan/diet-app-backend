@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    calories:{
+        type: Number,
+        required: true
+    },
     streaks:{
         type: Number,
         required: true
