@@ -137,4 +137,16 @@ router.get("/leaderboard", async (req, res) => {
     }
 });
 
+router.delete('/:email', async (req, res) => {
+    const {email} = req.params
+    try {
+        const del = await Users.deleteOne({email:email})
+        return res.status(201).send(`${email} has been deleted`)
+    } catch (error) {
+        return res.status(500).send(error)
+        
+    }
+    res.send('GET request to the homepage')
+})
+
 module.exports = router;
