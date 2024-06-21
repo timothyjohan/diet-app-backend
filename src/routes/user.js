@@ -149,4 +149,17 @@ router.delete('/:email', async (req, res) => {
     res.send('GET request to the homepage')
 })
 
+router.put('/calories/:email', async (req, res) => {
+    const {email} = req.params
+    const {calories} = req.query
+    if(!calories){
+        return res.status(400).send("Calories can't be empty")
+    }
+    try {
+        const update = await Users.updateOne({email:email}, {calories:calories})
+        return res.status(201).send(update)
+    } catch (error) {
+        return res.status(500).send(error)
+    }
+})
 module.exports = router;
