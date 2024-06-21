@@ -157,7 +157,7 @@ router.put('/calories/:email', async (req, res) => {
     }
     try {
         const update = await Users.updateOne({email:email}, {calories:calories})
-        return res.status(201).send(update)
+        return res.status(201).send("Updated")
     } catch (error) {
         return res.status(500).send(error)
     }
