@@ -60,6 +60,10 @@ router.post('/add', checkUser, async (req, res) => {
 // contoh: 2024-6-18
 router.get('/dates', async (req, res) => {
   const {before, after, email} = req.query
+  if(!before || !after){
+    return res.status(400).send("Invalid fields")
+
+  }
   if(!email){
     try {
       const result = await LogFoods.find({
