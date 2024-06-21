@@ -109,6 +109,23 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/getUser", async (req, res) => {
+    const { email } = req.query;
+    const login = await Users.findOne({ email: email});
+    let result = {
+        "id": 1,
+        "email": login.email,
+        "password": login.password,
+        "name": login.name,
+        "gender": login.gender,
+    }
+    if (login) {
+        return res.status(200).send(result);
+    } else {
+        return res.status(401).send("NDAK");
+    }
+});
+
 router.get("/leaderboard", async (req, res) => {
     const { top } = req.query;
     if (!top) {
