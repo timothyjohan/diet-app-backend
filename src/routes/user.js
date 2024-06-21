@@ -50,7 +50,7 @@ const checkEmailExist = async (req, res, next) => {
 router.post("/add", checkEmailExist, async (req, res) => {
     const { email, password, name, gender } = req.body;
 
-    if (!email || !password || !name || !gender) {
+    if (!email || !password || !name) {
         return res.status(400).send("invalid fields");
     }
 
